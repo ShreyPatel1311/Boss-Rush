@@ -32,6 +32,16 @@ public class PlayerAttackState : MonoBehaviour
         }
         if (Time.time - lastClickedTime > maxComboDelay)
         {
+            noOfClicks = 0;
+            MyAniamtor.SetFloat("Movement", 0, 0.1f, Time.deltaTime);
+        }
+
+        if (Time.time > nextFireTime)
+        {
+            if (Input.GetMouseButton(0))
+            {
+                PlayerInput_AttackEvent();
+            }
         }
 
     }
@@ -49,13 +59,13 @@ public class PlayerAttackState : MonoBehaviour
         if (noOfClicks >= 2 && MyAniamtor.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.7f && MyAniamtor.GetCurrentAnimatorStateInfo(0).IsName("LightAttack1"))
         {
             MyAniamtor.SetBool("hit1", false);
-            MyAniamtor.SetBool("hit1", true);
+            MyAniamtor.SetBool("hit2", true);
         }
 
         if (noOfClicks >= 3 && MyAniamtor.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.7f && MyAniamtor.GetCurrentAnimatorStateInfo(0).IsName("LightAttack2"))
         {
-            MyAniamtor.SetBool("hit1", false);
-            MyAniamtor.SetBool("hit1", true);
+            MyAniamtor.SetBool("hit2", false);
+            MyAniamtor.SetBool("hit3", true);
         }
     }
 
