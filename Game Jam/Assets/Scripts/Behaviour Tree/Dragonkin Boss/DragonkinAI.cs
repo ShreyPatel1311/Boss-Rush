@@ -11,6 +11,9 @@ public class DragonkinAI : MonoBehaviour
     //[SerializeField] private GameObject treasure2;
     //[SerializeField] private int priority2;
 
+    [SerializeField] private GameObject playerRef;
+    [SerializeField] private DragonkinConfigurationSO config;
+ 
     [Header("Phase 1")]
     [SerializeField] private List<AnimationClip> phase1LightAnimations;
     [SerializeField] private List<AnimationClip> phase1ComboAnimations;
@@ -74,6 +77,11 @@ public class DragonkinAI : MonoBehaviour
         //tree.AddChild(goTotreasures);
 
         Selector phaseChange = new Selector("Phase Change", 10);
+
+        Selector phase1 = new Selector("Attack Selection", 8);
+        Sequence lightAttack = new Sequence("Light attacks", 6);
+        lightAttack.AddChild(new Leaf("Light Attacks", new Condition(() => (Vector3.Distance(transform.position, playerRef.transform.position) <= config.lightAttackDistance))));
+
 
 
 
